@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whisqle</title>
+  <style>
+    :root {
+      --bg: #0e0e10;
+      --surface: #18181b;
+      --surface2: #1f1f23;
+      --border: #2d2d33;
+      --text: #efeff1;
+      --muted: #adadb8;
+      --purple: #9147ff;
+      --purple-hover: #772ce8;
+      --green: #00b16a;
+      --red: #eb4034;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      max-width: 580px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--purple);
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 20px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 580px;
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ── Mode selection ─────────────────────────────────────────── */
+
+    #mode-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-top: 32px;
+    }
+
+    #mode-screen .intro {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 380px;
+    }
+
+    #mode-screen h2 {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .mode-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .mode-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 16px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      user-select: none;
+    }
+
+    .mode-card:hover {
+      border-color: var(--purple);
+      background: var(--surface2);
+      transform: translateY(-1px);
+    }
+
+    .mode-card:active { transform: translateY(0); }
+    .mode-card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .mode-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .mode-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+
+    /* ── Game screen ────────────────────────────────────────────── */
+
+    #game-screen {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Hint area */
+    .hint-area {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    #hint-media {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    #hint-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #hint-media .placeholder-icon {
+      font-size: 3.5rem;
+      color: var(--border);
+    }
+
+    #hint-media iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    #hint-embed-notice {
+      display: none;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 6px 14px;
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+    }
+
+    #hint-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 10px 12px;
+    }
+
+    #hint-pills:empty { padding: 0; }
+
+    .hint-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hint-pill strong { color: var(--purple); font-weight: 600; }
+
+    /* Board */
+    .board {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .guess-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      min-height: 46px;
+      font-size: 0.875rem;
+    }
+
+    .guess-row.empty {
+      border-style: dashed;
+      border-color: var(--border);
+      background: transparent;
+      opacity: 0.4;
+    }
+
+    .guess-row.active {
+      border-color: var(--purple);
+      border-style: dashed;
+      background: transparent;
+      opacity: 0.6;
+    }
+
+    .guess-row .emojis {
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      min-width: 44px;
+    }
+
+    .guess-row .guess-label {
+      flex: 1;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .guess-row .direction {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* Input area */
+    #input-area {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    select, input[type="number"] {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 9px 12px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    select {
+      flex: 2;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23adadb8' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+      cursor: pointer;
+    }
+
+    input[type="number"] {
+      flex: 1;
+      min-width: 72px;
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+    select:focus, input[type="number"]:focus { border-color: var(--purple); }
+    select.error, input[type="number"].error { border-color: var(--red); }
+
+    .btn {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { background: var(--purple-hover); }
+    .btn:active { transform: scale(0.97); }
+    .btn:disabled {
+      background: var(--border);
+      color: var(--muted);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid var(--purple);
+      color: var(--purple);
+    }
+
+    .btn-ghost:hover { background: var(--purple); color: #fff; }
+
+    #guess-counter {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    #error-msg {
+      margin-top: 7px;
+      font-size: 0.8rem;
+      color: var(--red);
+      min-height: 18px;
+    }
+
+    /* Result */
+    #result-area {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 16px;
+      text-align: center;
+    }
+
+    #result-area.show { display: flex; }
+
+    #result-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    #result-title.win { color: var(--green); }
+    #result-title.lose { color: var(--red); }
+
+    #result-answer {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    #emoji-grid {
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      line-height: 2;
+    }
+
+    #copy-btn { margin-top: 4px; }
+
+    #copy-confirm {
+      font-size: 0.8rem;
+      color: var(--green);
+      height: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Whisqle</h1>
+  <span class="badge" id="mode-badge" style="display:none"></span>
+</header>
+
+<main>
+
+  <!-- Mode selection -->
+  <div id="mode-screen">
+    <p class="intro">A Twitch clip plays. Guess the month and year it's from. 6 guesses.</p>
+    <h2>Choose a mode</h2>
+    <div class="mode-cards">
+      <div class="mode-card" onclick="startGame('normal')">
+        <div class="icon">🎮</div>
+        <h3>Normal</h3>
+        <p>Clip unlocks on guess 2. Year range and season hints on later guesses.</p>
+      </div>
+      <div class="mode-card" onclick="startGame('nohints')">
+        <div class="icon">🔒</div>
+        <h3>No Hints</h3>
+        <p>Thumbnail then clip — no year or season hints. Pure instinct.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game -->
+  <div id="game-screen">
+
+    <div class="hint-area">
+      <div id="hint-media">
+        <span class="placeholder-icon">🎬</span>
+      </div>
+      <div id="hint-embed-notice">⚠️ Clip embeds require serving over HTTP — open via <code>npx serve .</code> or similar.</div>
+      <div id="hint-pills"></div>
+    </div>
+
+    <div class="board" id="board"></div>
+
+    <div id="input-area">
+      <div class="input-row">
+        <select id="month-select">
+          <option value="">Month…</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+        <input type="number" id="year-input" placeholder="Year" min="2011" max="2026">
+        <button class="btn" id="submit-btn" onclick="submitGuess()">Guess</button>
+      </div>
+      <div id="error-msg"></div>
+      <div id="guess-counter">Guess 1 of 6</div>
+    </div>
+
+    <div id="result-area">
+      <div id="result-title"></div>
+      <div id="result-answer"></div>
+      <div id="emoji-grid"></div>
+      <button class="btn btn-ghost" id="copy-btn" onclick="copyResult()">📋 Copy Result</button>
+      <div id="copy-confirm"></div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+  // ── Constants ──────────────────────────────────────────────────────────────
+
+  const MAX_GUESSES = 6;
+
+  const MONTHS = [
+    '', 'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const SEASON_MONTHS = {
+    winter: [12, 1, 2],
+    spring: [3, 4, 5],
+    summer: [6, 7, 8],
+    fall:   [9, 10, 11]
+  };
+
+  const SEASON_LABEL = {
+    winter: '❄️ Winter',
+    spring: '🌸 Spring',
+    summer: '☀️ Summer',
+    fall:   '🍂 Fall'
+  };
+
+  // ── State ──────────────────────────────────────────────────────────────────
+
+  let clips      = [];
+  let todaysClip = null;
+  let gameMode   = null;   // 'normal' | 'nohints'
+  let guesses    = [];     // [{ month, year }, ...]
+  let gameOver   = false;
+  let won        = false;
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+
+  function getSeason(month) {
+    for (const [name, months] of Object.entries(SEASON_MONTHS)) {
+      if (months.includes(month)) return name;
+    }
+  }
+
+  function totalMonths(year, month) {
+    return year * 12 + month;
+  }
+
+  function getYearEmoji(gY, gM, cY, cM) {
+    if (gY === cY) return '🟩';
+    const diff = Math.abs(totalMonths(gY, gM) - totalMonths(cY, cM));
+    return diff <= 12 ? '🟨' : '🟥';
+  }
+
+  function getMonthEmoji(gM, cM) {
+    if (gM === cM) return '🟩';
+    return getSeason(gM) === getSeason(cM) ? '🟨' : '🟥';
+  }
+
+  function getDirection(gY, gM, cY, cM) {
+    return totalMonths(gY, gM) < totalMonths(cY, cM) ? '⬆ Too early' : '⬇ Too late';
+  }
+
+  function getDailyClip(arr) {
+    const now   = new Date();
+    const utc   = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    const epoch = Date.UTC(2024, 0, 1);
+    const days  = Math.floor((utc - epoch) / 86400000);
+    return arr[((days % arr.length) + arr.length) % arr.length];
+  }
+
+  function extractClipId(url) {
+    const m = url.match(/clips\.twitch\.tv\/([^/?&#]+)/) ||
+              url.match(/twitch\.tv\/[^/]+\/clip\/([^/?&#\s]+)/);
+    return m ? m[1] : null;
+  }
+
+  // ── Start game ─────────────────────────────────────────────────────────────
+
+  function startGame(mode) {
+    gameMode = mode;
+    document.getElementById('mode-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'flex';
+    document.getElementById('game-screen').style.flexDirection = 'column';
+    document.getElementById('game-screen').style.gap = '14px';
+
+    const badge = document.getElementById('mode-badge');
+    badge.style.display = '';
+    badge.textContent = mode === 'normal' ? '🎮 Normal' : '🔒 No Hints';
+
+    render();
+  }
+
+  // ── Render ─────────────────────────────────────────────────────────────────
+
+  function render() {
+    renderHints();
+    renderBoard();
+    renderInput();
+  }
+
+  function renderHints() {
+    const submitted = guesses.length;
+    const showClip       = submitted >= 1;
+    const showYearHint   = gameMode === 'normal' && submitted >= 3;
+    const showSeasonHint = gameMode === 'normal' && submitted >= 4;
+
+    const media  = document.getElementById('hint-media');
+    const notice = document.getElementById('hint-embed-notice');
+    const pills  = document.getElementById('hint-pills');
+
+    // Thumbnail / embed
+    if (showClip) {
+      const clipId = extractClipId(todaysClip.clipUrl);
+      const host   = window.location.hostname;
+
+      if (!clipId) {
+        // Fallback: show thumbnail if clip URL isn't a recognisable Twitch clip
+        media.innerHTML = todaysClip.thumbnailUrl
+          ? `<img src="${todaysClip.thumbnailUrl}" alt="Clip thumbnail">`
+          : `<span class="placeholder-icon">🎬</span>`;
+      } else if (!host) {
+        // file:// — embeds won't work
+        media.innerHTML = todaysClip.thumbnailUrl
+          ? `<img src="${todaysClip.thumbnailUrl}" alt="Clip thumbnail">`
+          : `<span class="placeholder-icon">🎬</span>`;
+        notice.style.display = 'block';
+      } else {
+        const src = `https://clips.twitch.tv/embed?clip=${clipId}&parent=${host}&autoplay=false`;
+        media.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+        if (todaysClip.thumbnailUrl) {
+          // Thumbnail behind iframe — handled by iframe overlay
+        }
+        notice.style.display = 'none';
+      }
+    } else {
+      // Guess 1: thumbnail only
+      notice.style.display = 'none';
+      if (todaysClip.thumbnailUrl) {
+        media.innerHTML = `<img src="${todaysClip.thumbnailUrl}" alt="Clip thumbnail">`;
+      } else {
+        media.innerHTML = `<span class="placeholder-icon">🎬</span>`;
+      }
+    }
+
+    // Text hint pills
+    pills.innerHTML = '';
+
+    if (showYearHint) {
+      const pill = document.createElement('div');
+      pill.className = 'hint-pill';
+      pill.innerHTML = `<strong>📅 Year:</strong> ${todaysClip.year - 1}–${todaysClip.year + 1}`;
+      pills.appendChild(pill);
+    }
+
+    if (showSeasonHint) {
+      const pill = document.createElement('div');
+      pill.className = 'hint-pill';
+      pill.innerHTML = `<strong>🌿 Season:</strong> ${SEASON_LABEL[getSeason(todaysClip.month)]}`;
+      pills.appendChild(pill);
+    }
+  }
+
+  function renderBoard() {
+    const board = document.getElementById('board');
+    board.innerHTML = '';
+
+    for (let i = 0; i < MAX_GUESSES; i++) {
+      const row = document.createElement('div');
+
+      if (i < guesses.length) {
+        // Filled guess
+        const g      = guesses[i];
+        const yEmoji = getYearEmoji(g.year, g.month, todaysClip.year, todaysClip.month);
+        const mEmoji = getMonthEmoji(g.month, todaysClip.month);
+        const exact  = g.year === todaysClip.year && g.month === todaysClip.month;
+        const dir    = exact ? '✓ Correct!' : getDirection(g.year, g.month, todaysClip.year, todaysClip.month);
+
+        row.className = 'guess-row';
+        row.innerHTML = `
+          <span class="emojis">${yEmoji}${mEmoji}</span>
+          <span class="guess-label">${MONTHS[g.month]} ${g.year}</span>
+          <span class="direction">${dir}</span>`;
+      } else if (i === guesses.length && !gameOver) {
+        // Current guess slot
+        row.className = 'guess-row active';
+      } else {
+        // Future empty slot
+        row.className = 'guess-row empty';
+      }
+
+      board.appendChild(row);
+    }
+  }
+
+  function renderInput() {
+    const inputArea = document.getElementById('input-area');
+    const resultArea = document.getElementById('result-area');
+
+    if (gameOver) {
+      inputArea.style.display = 'none';
+      showResult(resultArea);
+    } else {
+      inputArea.style.display = 'block';
+      const n = guesses.length + 1;
+      document.getElementById('guess-counter').textContent = `Guess ${n} of ${MAX_GUESSES}`;
+    }
+  }
+
+  function showResult(area) {
+    area.classList.add('show');
+
+    const title  = document.getElementById('result-title');
+    const answer = document.getElementById('result-answer');
+    const grid   = document.getElementById('emoji-grid');
+
+    if (won) {
+      const n = guesses.length;
+      title.textContent  = n === 1 ? '🏆 First try!' : `🎉 Got it in ${n}!`;
+      title.className    = 'result-title win';
+    } else {
+      title.textContent  = '😔 Better luck tomorrow';
+      title.className    = 'result-title lose';
+    }
+
+    answer.textContent = `Answer: ${MONTHS[todaysClip.month]} ${todaysClip.year}`;
+
+    grid.innerHTML = guesses.map(g => {
+      const y = getYearEmoji(g.year, g.month, todaysClip.year, todaysClip.month);
+      const m = getMonthEmoji(g.month, todaysClip.month);
+      return `${y}${m}`;
+    }).join('<br>');
+  }
+
+  // ── Submit guess ───────────────────────────────────────────────────────────
+
+  function submitGuess() {
+    if (gameOver) return;
+
+    const monthEl = document.getElementById('month-select');
+    const yearEl  = document.getElementById('year-input');
+    const errorEl = document.getElementById('error-msg');
+
+    const month = parseInt(monthEl.value);
+    const year  = parseInt(yearEl.value);
+
+    // Validation
+    let err = '';
+    if (!month)                          err = 'Please select a month.';
+    else if (!year || isNaN(year))       err = 'Please enter a year.';
+    else if (year < 2011 || year > 2026) err = 'Year must be between 2011 and 2026.';
+
+    if (err) {
+      errorEl.textContent = err;
+      if (!month) monthEl.classList.add('error'); else monthEl.classList.remove('error');
+      if (!year || isNaN(year) || year < 2011 || year > 2025)
+        yearEl.classList.add('error'); else yearEl.classList.remove('error');
+      return;
+    }
+
+    errorEl.textContent = '';
+    monthEl.classList.remove('error');
+    yearEl.classList.remove('error');
+
+    guesses.push({ month, year });
+
+    if (year === todaysClip.year && month === todaysClip.month) {
+      won = true;
+      gameOver = true;
+    } else if (guesses.length >= MAX_GUESSES) {
+      gameOver = true;
+    }
+
+    // Reset inputs
+    monthEl.value = '';
+    yearEl.value  = '';
+
+    render();
+  }
+
+  // Allow Enter key to submit
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !gameOver && gameMode) submitGuess();
+  });
+
+  // ── Share ──────────────────────────────────────────────────────────────────
+
+  function buildShareText() {
+    const modeName = gameMode === 'normal' ? 'Normal' : 'No Hints';
+    const result   = won ? `${guesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`;
+    const rows     = guesses.map(g => {
+      const y = getYearEmoji(g.year, g.month, todaysClip.year, todaysClip.month);
+      const m = getMonthEmoji(g.month, todaysClip.month);
+      return `${y}${m}`;
+    });
+    return `Whisqle ${result} [${modeName}]\n${rows.join('\n')}`;
+  }
+
+  function copyResult() {
+    const text    = buildShareText();
+    const btn     = document.getElementById('copy-btn');
+    const confirm = document.getElementById('copy-confirm');
+
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Copied!';
+      confirm.textContent = text.split('\n').slice(1).join('  ');
+      setTimeout(() => {
+        btn.textContent     = '📋 Copy Result';
+        confirm.textContent = '';
+      }, 2500);
+    }).catch(() => {
+      confirm.textContent = 'Copy failed — try a different browser.';
+    });
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+
+  async function init() {
+    try {
+      const res = await fetch('clips.json');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      clips      = await res.json();
+      todaysClip = getDailyClip(clips);
+    } catch (e) {
+      document.querySelector('main').innerHTML = `
+        <div style="padding:48px 16px;text-align:center;color:var(--muted)">
+          <div style="font-size:2.5rem;margin-bottom:16px">⚠️</div>
+          <strong style="color:var(--text)">Could not load clips.json</strong><br><br>
+          Open this file over HTTP — e.g.:<br>
+          <code style="background:var(--surface2);padding:4px 10px;border-radius:4px;margin-top:10px;display:inline-block">
+            npx serve .
+          </code>
+        </div>`;
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
