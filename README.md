@@ -1,1 +1,1 @@
-#the Whisqey clip daily game - live at whisqle.xyz!
+## the Whisqey clip daily game - live at [whisqle.xyz](whisqle.xyz)!
