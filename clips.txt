@@ -1,0 +1,437 @@
+# Whisqle clip list — one URL per line.
+# Lines starting with # are comments and are ignored.
+# Blank lines are also ignored.
+#
+# To regenerate clips.json from this file:
+#   TWITCH_CLIENT_ID=xxx TWITCH_CLIENT_SECRET=xxx node fetch-clips.js
+#
+# Order matters: the daily clip is picked by (UTC day % clip count),
+# so reordering will change which clip appears on which day.
+
+
+# ==========================================================================
+# === 2026 ===
+# ==========================================================================
+
+https://www.twitch.tv/whisqey/clip/AthleticPricklyOrcaEleGiggle-UXLRXH4wXMotpf3I
+https://www.twitch.tv/whisqey/clip/EmpathicDepressedKumquatPunchTrees-C3n141qxZ6UsdOOZ
+https://www.twitch.tv/samwitch/clip/PunchyPricklyGrousePanicBasket-3puUIlkkB6OvrZ_f
+https://www.twitch.tv/whisqey/clip/RoughGrossWhaleAMPEnergy-csY2sBByVQ8jeW8u
+https://www.twitch.tv/whisqey/clip/DistinctAdventurousPotatoKappaRoss-s8JGiJAKdcax06Ru
+https://www.twitch.tv/whisqey/clip/VictoriousBlazingJaguarSmoocherZ-GYBESbHM_KJvD0uO
+https://www.twitch.tv/whisqey/clip/RealBadNeanderthalPeteZarollTie-cLF85oFw3dvNUylF
+https://www.twitch.tv/whisqey/clip/UglyWildMonkeyCmonBruh-Y3zTQaZIx1kDeicn
+https://www.twitch.tv/whisqey/clip/IncredulousFlaccidHabaneroChocolateRain-ewTotNbKFLO_FWdR
+https://www.twitch.tv/whisqey/clip/WrongPrettyPizzaMoreCowbell-SiMrE-nxHOvQx0gC
+https://www.twitch.tv/whisqey/clip/NaiveBusyManateePlanking-HFD_iHZK9XSTp34D
+https://www.twitch.tv/whisqey/clip/ConfidentInquisitiveDonutNinjaGrumpy-vwqpqJR5iXs4qnHy
+https://www.twitch.tv/whisqey/clip/AbrasiveBumblingSalmonCharlieBitMe-_eZqxWwVP20HBG8X
+https://www.twitch.tv/whisqey/clip/TastyYawningDurianTheTarFu-hMVd0E0JeqarhIDV
+https://www.twitch.tv/whisqey/clip/AmorphousStylishRabbitMcaT-eAqOZtEXbuMIQzS9
+https://www.twitch.tv/whisqey/clip/QuaintThankfulPangolinOSsloth-KALHLbP4b_fKFGN3
+https://www.twitch.tv/carla/clip/RichInspiringFrogBCouch-YZulKL6GGnb8Jbh6
+https://www.twitch.tv/whisqey/clip/SpeedyInspiringLocustFrankerZ-ejycFfxPyzgpZxyH
+https://www.twitch.tv/whisqey/clip/CrackyEsteemedSparrowPlanking-fpH3lV6iLFqwFFFx
+https://www.twitch.tv/whisqey/clip/HelpfulKindGoblinDxCat-J4ojsic8HyBzHTbT
+https://www.twitch.tv/whisqey/clip/BraveBadClintShazBotstix-330ZP2YpWtnVNNSi
+https://www.twitch.tv/carla/clip/SingleExpensiveDunlinSuperVinlin-1CIKCHeunwCWEZZU
+https://www.twitch.tv/whisqey/clip/EnchantingRockyFiddleheadsPeteZaroll-g699f77DC2vZLviH
+https://www.twitch.tv/whisqey/clip/YawningAmericanNostrilBlargNaut-IP7Eav7HyK8-B2Jz
+https://www.twitch.tv/whisqey/clip/HelpfulDeterminedSkunkDatSheffy-S7rvGHgt-R7VLf87
+https://www.twitch.tv/whisqey/clip/SourBigYogurtYouDontSay-7_NjrNfC49v4DWBW
+https://www.twitch.tv/whisqey/clip/HeartlessCrispyDragonflyJebaited-RIZ2KFAd4hGljhvh
+https://www.twitch.tv/whisqey/clip/ObeseCrunchyWalletDoubleRainbow-NyMSN1VEFl2V28ra
+https://www.twitch.tv/whisqey/clip/TriangularResilientPeafowlLitFam-WwaE_uxB_aoEAPkd
+https://www.twitch.tv/whisqey/clip/BadNiceGorillaNomNom-iheSSrHgwVjkwqDy
+https://www.twitch.tv/whisqey/clip/SnappyJollyKangarooCoolCat-EvKUqhEw1NHyy1yr
+https://www.twitch.tv/whisqey/clip/RockyAbstemiousRaccoonEleGiggle-QB-kuSXIkRhpxW3V
+
+
+# ==========================================================================
+# === 2024 ===
+# ==========================================================================
+
+# --- (unsorted / early) ---
+
+# (guys shlonger with boing sound)
+https://clips.twitch.tv/WiseLazyMacaroniPanicBasket-pa67lIUqY3zkfOe2
+# (donut steal from little kitty big city)
+https://clips.twitch.tv/MoldySparklingManateeNotATK-lPXmuw9vO5jPH9Vz
+# (rope climbing from irl stream)
+https://clips.twitch.tv/PoorPlainDelicataThunBeast-yEPcRLWEd_eJj2nX
+# (euro rivals announcement more important than jesus)
+https://clips.twitch.tv/ElegantZanyKoupreyHeyGuys-hcu34A7265kqzpsu
+# (scared by door opening in pools)
+https://clips.twitch.tv/AdorableGoodFlamingoDuDudu-CQTKckJde8LWp2li
+# (kinito pet turns on random cam)
+https://clips.twitch.tv/UglyRockyGarageNotATK-ClnvmwaA3F-LYWfV
+# (jimmy neutrons mom tier list)
+https://clips.twitch.tv/RespectfulJoyousPuddingArsonNoSexy-hU_IDZ62KtuYTuD1
+# (take on me sinister shift irl stream)
+https://clips.twitch.tv/GiftedBigLlamaPogChamp-ImSvU5vkFOC7rdtp
+# (outer pronounced as ooter wordle)
+https://clips.twitch.tv/AntediluvianInventiveSheepPipeHype-vN9d_2qSQZPUqKHw
+# (pocketing a crowd surfing chipmunk)
+https://clips.twitch.tv/OnerousAgileFishBIRB-2o2ruhoS8pJMeJWb
+# (gay thoughts black mold side effect)
+https://clips.twitch.tv/TolerantFurtiveEyeballPeteZaroll-TBiiR5QsnwB5aDpS
+# (2 tickets deal or no deal win)
+https://clips.twitch.tv/DoubtfulAttractiveAntNerfRedBlaster-Gen-fSj-zD1eH8ZZ
+# (homophobic yoda)
+https://clips.twitch.tv/LitigiousFancyBeeFloof-Sa6VDI9dR4mMaa-Q
+# (tired of moments of silence spotify blerp)
+https://clips.twitch.tv/PoliteCredulousWaffleNinjaGrumpy-XzM1yxxkEa-qq2gD
+# (miner i never notice how fat ur wiener was)
+https://clips.twitch.tv/EnticingResolutePenguinAllenHuhu-SAog-fJNuqH1M6Zl
+# (deepthroating corn dog irl)
+https://clips.twitch.tv/ObedientShakingTeaFunRun-wvEJxFDWG6rjTYo8
+# (content warning madness)
+https://clips.twitch.tv/LittleWealthyJaguarFutureMan-0SYKK_r-oFTf2t23
+
+
+# --- June/July ---
+
+# (nacho cheese euro irl)
+https://clips.twitch.tv/NastyDelightfulDogPrimeMe-62LQahd5fsh_650x
+# (fortnite chaos)
+https://clips.twitch.tv/EmpathicBrightDragonfruitRiPepperonis-3LjVCnbReLVJVgX4
+# (ice cream and vagina are both amazing)
+https://clips.twitch.tv/BlitheProtectiveOpossumOSfrog-4Sz58_yq6LpAObnq
+# (penis, bye. irl stream)
+https://clips.twitch.tv/SuaveTawdryNightingalePogChamp-KlKG7lurHZPiohow
+# (execute them all bomb throw rivals)
+https://clips.twitch.tv/SingleSleepyOstrichCoolCat-naYnbL9F65cdDmhd
+# (two wiener clips for COTM)
+https://clips.twitch.tv/VastCrazyEchidnaPogChamp-wMN5lODdThlT3HYZ
+# (wiener in math class car rev)
+https://clips.twitch.tv/LazyAntsyBobaAliens-YYHs101X-7_GyX46
+# (irish lads irl)
+https://clips.twitch.tv/AliveResourcefulSkirretFailFish-TesIohQ8p6ZOq_vW
+# (rivals win conveyer belt)
+https://clips.twitch.tv/KawaiiSavoryEagleDBstyle-k_HuRaWYDNRrH4qj
+# (mic deepthroat duck detective)
+https://clips.twitch.tv/RoundShyRadishKeepo-wq3Sjd9q7OVyiIn5
+# (ice breaker rivals win)
+https://clips.twitch.tv/PiercingSpeedyTarsierCclamChamp-5D3Y_hXR-Gw0g6bw
+# (wiqy cryptid)
+https://clips.twitch.tv/SuspiciousHilariousOxNononoCat-l8zmA9AWC0VG3vCE
+# (shinkansen come here pookie scare)
+https://clips.twitch.tv/PiercingTalentedMushroomCoolStoryBro-Pil0MQE8A-otZtyM
+
+
+# --- August ---
+
+# (dont go down there, dark hours)
+https://clips.twitch.tv/ThankfulFaintEggnogTinyFace-DEu4NsuE8EJW5DwP
+# (stretcher men win)
+https://clips.twitch.tv/SpookyInexpensiveDurianBabyRage-cPR7i9noXhwmSL22
+# (ate banths mushroom, oh deer)
+https://clips.twitch.tv/ConcernedCorrectFalconAllenHuhu-LgclZv0BuEK9S47h
+# (sami betrayal, lockdown protocol)
+https://clips.twitch.tv/AttractiveHeartlessRabbitOhMyDog-zFWamV075FxI7e11
+# (silent wall twerking)
+https://clips.twitch.tv/TsundereArbitraryWrenGOWSkull-H-9c18dmeJk1wvOS
+# (checking on bathroom, tavern manager)
+https://clips.twitch.tv/SuaveDeafDurianBIRB-kLkpDocZvcX3kt1Q
+# (eating carrot penis, thank goodness youre here)
+https://clips.twitch.tv/EagerDeliciousLegTTours-_zJXL4XLzmAKTU-f
+# (overcooked chaos with banth and sami)
+https://clips.twitch.tv/GoodDeafGnatCopyThis-GNQjEkIYo-CvGoxA
+# (kind of paper that comes on a roll.. cinnamon, gaggl)
+https://clips.twitch.tv/WittyInexpensiveSkunkThisIsSparta-9OrFDwVwtDMzPFVK
+# (hitting the bong, lockdown protocol)
+https://clips.twitch.tv/TenaciousAgileStaplePartyTime-NPx3NzL7pb6pZBEb
+# (goofy squirrel with a gun clip)
+https://clips.twitch.tv/CourageousVictoriousAubergineCharlietheUnicorn--U2drJm4UCDekNae
+# (pikmin is back, stretcher men)
+https://clips.twitch.tv/SincereVivaciousSaladSoBayed-WP2y6AQs2Ug1D4rt
+# (im not stroking it, im trying to get it off, thank goodness youre here)
+https://clips.twitch.tv/KawaiiDullSwordTwitchRPG-CAbZPqeU53I6elw8
+# (bury me in goth women, stretcher men)
+https://clips.twitch.tv/VivaciousSillyGoldfishFreakinStinkin-mou8la9kEBnjUjUy
+# (heavy flow tonight queen, bathhouse)
+https://clips.twitch.tv/LongSlipperyStarlingUnSane-J7AY4PfXzL5-cPIv
+# (front shots, stretcher men)
+https://clips.twitch.tv/CrepuscularZanyWrenFUNgineer-4B4wDJwHkzV3Mwei
+# (you dont wanna go in there, lockdown protocol)
+https://clips.twitch.tv/CallousNastyTarsierPoooound-L-0J7ZYf6rvTowEJ
+# (im eating popcorn, bathhouse)
+https://clips.twitch.tv/SneakySecretiveLattePlanking-kf6BpNei1v8G9xta
+# (to commemorate the 3 hour photoshop debacle)
+https://clips.twitch.tv/PiercingHedonisticFlamingoBCouch-t3V14pifQCMTVZOG
+# (oh no monkeys, bathhouse maybe)
+https://clips.twitch.tv/ResoluteTacitOcelotKeepo-KhTVJGWYXNy2J8bt
+
+
+# --- September ---
+
+# (grinding on her ex - crime scene cromulator)
+https://clips.twitch.tv/NiceFurryMartenHumbleLife-Opy6-8UQQm4celnF
+# (squirrel with an SMG)
+https://clips.twitch.tv/SuaveEasyBibimbapHassaanChop-SUYcsfKrBl2g_u_P
+# (chevy reacharound month - crime scene cromulator)
+https://clips.twitch.tv/SourGracefulRatVoteNay-i3NE4YXIr9XS72dz
+# (pregnancy test 1 - crime scene cromulator)
+https://clips.twitch.tv/CallousThankfulWatercressPicoMause-CXnXgYj4fytg9UIK
+# (pregnancy test 2 - CSC)
+https://clips.twitch.tv/JollyAlluringWombatRickroll-N4a3vN2RvL0ErToR
+# (party like there's no tomorrow - CSC)
+https://clips.twitch.tv/DarlingUglySowLeeroyJenkins-GCBcfaSOdrbwTaP7
+# (wall twerking)
+https://clips.twitch.tv/CrispyShortPeafowlFUNgineer-EeoorjHDYT0g9OFG
+# (sami really happy to be here - pico park)
+https://clips.twitch.tv/RealDarlingBunnyArgieB8-EX4-U3DvyZkD8C-X
+# (banth is it me - pico park)
+https://clips.twitch.tv/CalmStrongArmadilloImGlitch-J1cKJBHPxZSMH4Er
+# (D&Dawson cosplay reveal dancing)
+https://clips.twitch.tv/AmazonianTransparentPlumPrimeMe-yAmae5dnpa2szIqg
+# (fire me please this is hell - D&Dawson)
+https://clips.twitch.tv/SolidSuspiciousNarwhalHassanChop-BmsR39dErZuW5JsF
+# (ebmracing corporate culture - D&Dawson)
+https://clips.twitch.tv/ResourcefulMistyElkPraiseIt-J5l5izBEZ5dPo7n9
+# (demotion - D&Dawson)
+https://clips.twitch.tv/BoxySlipperyWeaselAsianGlow-wBG83B0vgmO5nOjk
+# (it's flaccid! - D&Dawson)
+https://clips.twitch.tv/LuckyCrepuscularSrirachaNononoCat-U8VYa7saBO0uStfn
+# (evan set-up p1/3 - D&Dawson)
+https://clips.twitch.tv/BraveSeductiveTofuOhMyDog-SAh1lyctq9_aC6nm
+# (evan set-up p2/3 - D&Dawson)
+https://clips.twitch.tv/CovertSavoryDragonflyItsBoshyTime-MzCCHnnxTUJBJKDL
+# (evan set-up p3/3 - D&Dawson)
+https://clips.twitch.tv/WanderingInventiveEyeballNerfBlueBlaster-Q-Al7o6C1St5UU6C
+# (silent stanky leg)
+https://clips.twitch.tv/SmellyDaintyOxPoooound-mEbJlj8ykUeWqq0J
+# (swagged out - Casting of Frank Stone)
+https://clips.twitch.tv/SpoopyTalentedEyeballEleGiggle-hhzyJeobecB4ras0
+# (sure hope he doesn't hook him - Casting of Frank Stone)
+https://clips.twitch.tv/PoliteAgileDugongResidentSleeper-6AuUMflSxhOAmMLi
+# (she's alive, slay! - The Casting of Frank Stone)
+https://clips.twitch.tv/TastySmokyGorillaWutFace-Oho35vAJ51zZW-cB
+# (freakbox)
+https://clips.twitch.tv/HonestCrypticDadBibleThump-DtMLFY88oHcLH4LN
+# (how to be successful ft. backshots cam)
+https://clips.twitch.tv/SavageCuteOctopusSMOrc-SBnPjHVSaD8vMeC3
+# (sami pooped on the floor - D&Dawson)
+https://clips.twitch.tv/ThirstyRoundAnt4Head-Vloxaf2U1rVRqCye
+# (firing at random - D&Dawson)
+https://clips.twitch.tv/MushyRockyAntelopeGrammarKing-Uhit4U0n0izcwfIA
+# (tcon opening yo)
+https://clips.twitch.tv/DarlingGleamingGrassDuDudu-QYaRmQN8GA0jdM7_
+# (freddy fasbear tcon)
+https://clips.twitch.tv/TangentialFineDumplingsSwiftRage-jacA-_ZHcjzuQvzF
+# (freak-off tcon)
+https://clips.twitch.tv/ThoughtfulCulturedDonkeyTinyFace-ImdTZX21gxqpTuum
+# (barking at vtubers tcon)
+https://clips.twitch.tv/HonorableRelievedBillNotATK-6Za8jjsN0Hesao__
+# (web wins sticker tcon)
+https://clips.twitch.tv/UglyRamshackleCoffeeVoteNay-pN7Tr2JXT6sa4ByJ
+# (cat wins rock paper scissors tcon)
+https://clips.twitch.tv/SuccessfulAmusedCheeseCharlietheUnicorn-d4pf9r3h0X21-b9m
+# (i want one big booba lady tcon)
+https://clips.twitch.tv/HumbleBloodyWaterCurseLit-8plQ4hPE5I6SekrH
+# (pauly pingpong at tcon)
+https://clips.twitch.tv/BumblingAdventurousLaptopTheTarFu-HcFcTImJyzyDy4EZ
+
+
+# --- October ---
+
+# (close enough welcome home mufasa)
+https://clips.twitch.tv/DarkSweetPuppyCeilingCat-kytIo4ld9OUyrb_2
+# (bro rage quit)
+https://clips.twitch.tv/RacyKawaiiYakNerfRedBlaster-vQ6VnfdNUjbXZMPp
+# (i dont look off putting)
+https://clips.twitch.tv/SlickFilthySeahorseDogFace-t7CNlJs0WxxmqPZA
+# (when my girl has a bad day)
+https://clips.twitch.tv/LightGiftedMagePJSalt-MiFneIBb3qylKMi3
+# (bouncing on it)
+https://clips.twitch.tv/TardyStylishPorcupineFreakinStinkin-CBwkfD-ZQUVz7ufu
+
+
+# --- God Game Gauntlet (GGG) ---
+
+# (GGG gamer prayer)
+https://clips.twitch.tv/YummyGloriousAnacondaMVGame-gsks0GiCMzYPzHC2
+# (GGG valorant guys focus to insta death)
+https://clips.twitch.tv/ToughHungryShingleDxCat-nWElk9rCjH6SGbpH
+# (how does the outlaw work)
+https://clips.twitch.tv/LaconicPreciousTroutJebaited-8-EHDCmLDN4r_Nna
+# (GGG RL we just have to not let them score)
+https://clips.twitch.tv/FurryRespectfulPigPupper-DEnRjQRrHSeeKbm3
+# (your mother - bottle opening)
+https://clips.twitch.tv/AstuteRudeWatermelonStoneLightning-uJFn-Trr4gt86lUB
+# (halo harmony)
+https://clips.twitch.tv/LivelyInquisitiveShrewRedCoat-MBLfdpmrV5z1V_2O
+# (hes one hes one)
+https://clips.twitch.tv/VastFrozenAsparagusPlanking-A2DnViq_XbqSSgxJ
+
+
+# --- Dale & Dawson ---
+
+# (didnt shit himself)
+https://clips.twitch.tv/GiftedColdEggplantPastaThat-dOnqLalLWbBA4Q0L
+# (imagining penis)
+https://clips.twitch.tv/PlacidKnottySardineRitzMitz-_1MCeVa_guI1WuyN
+# (evan gets canned)
+https://clips.twitch.tv/SpotlessCorrectMallardStrawBeary-7CnMWVSqREkR8xGS
+# (exorcist)
+https://clips.twitch.tv/GlutenFreeObliqueRuffFunRun-BEVK8dEW0LCXcMK4
+# (sami exorcist to whisqey fired)
+https://clips.twitch.tv/LuckySpoopyPuppyDogFace-k_gjOuLIYj5FujYU
+
+
+# --- Silent Hill ---
+
+# (butt plug on the electric chair)
+https://clips.twitch.tv/BrightBlatantSpiderUnSane-XKqwV5JzSP-8TVX7
+# (jump scare + good aim)
+https://clips.twitch.tv/AbstemiousHonestDogBigBrother-tNY8Ph7XaHFBxaJ8
+# (bacon leg n cheese)
+https://clips.twitch.tv/CrunchyTastyCamelBuddhaBar-aoA_Bl63yTqW_gWA
+# (go on the show)
+https://clips.twitch.tv/InquisitiveWonderfulGalagoSuperVinlin-aQKV4Smgq22kln_e
+# (sneeze fall)
+https://clips.twitch.tv/TemperedDeadSalmonMcaT-ZOWpu7I2lW-B-mwO
+# (headbangin)
+https://clips.twitch.tv/CrepuscularDeliciousWebDeIlluminati-wnHmU_E1WGNteNOR
+
+
+# --- WIQYWEEN EVENT ---
+
+# (big naturals mask)
+https://clips.twitch.tv/FunTameManateeKevinTurtle-3BoM7hzEQuj31xmC
+# (butta chat butta on the chat)
+https://clips.twitch.tv/GeniusDifficultTeaShadyLulu-eSEsTxsiVltkS-n-
+# (wiqy and gang on Dark Hours)
+https://clips.twitch.tv/PlacidDeliciousAlpacaKappa-ceqe2jgW7IL6-WAg
+# (book tour Dark Hours)
+https://clips.twitch.tv/SplendidVainCardDansGame-_oboNLpvlCVteyLl
+# (dark hours)
+https://clips.twitch.tv/SquareNurturingCrocodilePRChase-UdXXL1dgoKzSKliV
+# (jumpscare)
+https://clips.twitch.tv/ModernInnocentAubergineWholeWheat-R7rHxuNkpe_b_JXD
+# (23 seconds of silent dancing)
+https://clips.twitch.tv/PluckySparklingHorseThunBeast-zMPf84dVEZKTg1gj
+# (liars bar aint his first rodeo)
+https://clips.twitch.tv/RespectfulCoyAlmondTooSpicy-vYvd4WkxwP6ZWTZM
+# (freddy fazbear dance)
+https://clips.twitch.tv/ResourcefulTangibleCucumberKeepo-bNZ2CZ85lPhdm_iX
+# (jumping jacks in schlongerie)
+https://clips.twitch.tv/SmellyBoldHabaneroTheThing-YtAsICSB7Z_e2v5Q
+# (elephant in the room schlongerie)
+https://clips.twitch.tv/DarkRespectfulCookieFeelsBadMan-kSPYd03IPokDb9r-
+# (wiqy on a date)
+https://clips.twitch.tv/VenomousWiseStapleBigBrother-Lop9l6jilDTraCoI
+# (wiqy on a date again)
+https://clips.twitch.tv/YummyFurryCakeWTRuck-AAnOIZvn6TQ9pSCK
+
+
+# --- November ---
+
+# (jerry seinfeld riff, obs duty)
+https://clips.twitch.tv/ProudCrispyOrcaBleedPurple-p2DpqX4OLsrZjpJs
+# (pillow face plant with glasses stomp)
+https://clips.twitch.tv/TallSmoothSalsifyHumbleLife-3uRD4YGzCp2CI6sO
+# (cow pee pee tiktok during obs duty)
+https://clips.twitch.tv/PeppyOddRaccoonWow--XgRS4rKLA8Xv89I
+# (if you gave me a year i could do the dishes)
+https://clips.twitch.tv/SingleWildSwallowYee-VODwXMgx9Py33b-O
+# (banth laughing at you having mono)
+https://clips.twitch.tv/OnerousDarlingHyenaRitzMitz-Lw1zbO0essiU_Jdg
+# (hat hair)
+https://clips.twitch.tv/WrongNimbleTapirPogChamp-k4RYThgpVB4w9Yxr
+# (GGG fort win)
+https://clips.twitch.tv/ArbitraryNimbleGoshawkSpicyBoy-w0KjxjbG-kMrbWU9
+# (do i look slumped?)
+https://clips.twitch.tv/PeppyDullPelicanMcaT-McMJRpcaPtiQkE51
+# (did damage with ice spice move)
+https://clips.twitch.tv/ArtisticKnottyTruffleDendiFace-JHkTdVR7BxU9YQ6R
+# (twerk in boxers, obs duty)
+https://clips.twitch.tv/CreativeBadIguanaPhilosoraptor-x7geXkVFwhV4htHc
+# (living room chair, anomalies have taken over, obs duty)
+https://clips.twitch.tv/SteamyGeniusPterodactylNinjaGrumpy-0Nbi-k1X_YJ2QfQn
+# (aurora boreas vtuber)
+https://clips.twitch.tv/InspiringGoodEggplantTF2John-hKXxgUouJDmLI8Pg
+# (do i give myself a pat on the back here, moving game)
+https://clips.twitch.tv/ToughCooperativeCurlewNinjaGrumpy-bl16x5E_BOi9di9W
+# (freaky ass bug jumpscare)
+https://clips.twitch.tv/DistinctGeniusNikudonDancingBaby-YtagWVv8IHI_xNjU
+# (im gonna fuck your brother, pink remix)
+https://clips.twitch.tv/SillyFurryNightingaleSmoocherZ-lVUJseiFKkVHnTMM
+# (donut jump scare, obs duty)
+https://clips.twitch.tv/CrazyRealClipsmomPanicVis-lv8nsJGHNjhSsvhw
+# (lobsters in a chinese restaurant bit)
+https://clips.twitch.tv/PerfectBlazingCarrotRaccAttack-Zu-RumRV2CSXbhIc
+
+
+# --- December ---
+
+# (belt whip indiana jones cosplay)
+https://clips.twitch.tv/BrightSleepyLadiesHeyGuys--EWk4fpkgaLKoukw
+# (i shoot myself its simple, buckshot roulette)
+https://clips.twitch.tv/ConcernedUnusualChickenTBTacoRight-T9UoY_uS_jPRJm_Y
+# (broom toss, indiana jones)
+https://clips.twitch.tv/TenderAntsyBadgerHassanChop-FkPezG-aq0ZaHj0A
+# (double why would he say that)
+https://clips.twitch.tv/PluckyLittleElephantSquadGoals-H_ptlSS6aUkzUMir
+# (jumpscare setting, the cabin factory)
+https://clips.twitch.tv/ObedientWittyTildeBCWarrior-zFlWfUIWDAfUUqkr
+# (deleting ween, enjoy your pussy)
+https://clips.twitch.tv/InterestingTenaciousUdonBuddhaBar-nFZ34tunD5B5g-V4
+# (bonjourno, indiana jones)
+https://clips.twitch.tv/AdorableShyWrenchWOOP-ivRz8V1CSmjaNV_S
+# (dicko mode crash, indiana jones)
+https://clips.twitch.tv/PopularSuspiciousTriangleAMPEnergyCherry-tZNa4mtD_KaiGsl_
+# (insane this love penis cover, get to work)
+https://clips.twitch.tv/AdorableImpartialElkYouWHY-W8gst5nUIKehDnQf
+# (gotta pull off a whisqeyism, get to work)
+https://clips.twitch.tv/ExuberantSleepyAnacondaDerp-HCzh8arY5saHioDz
+# (hes full of fruit, indiana jones)
+https://clips.twitch.tv/FitWimpyPeafowlSpicyBoy-Fogcp5Hqc6BhAT3U
+# (micro plastics are eating me out, entropy survivors)
+https://clips.twitch.tv/MotionlessNurturingOkapiEagleEye-ZDMaB3iOZpW22qI9
+# (dynamite is broken, indiana jones)
+https://clips.twitch.tv/AlluringPuzzledHamsterCorgiDerp-I1ikf3xeALdLhEth
+# (1 hp fort win)
+https://clips.twitch.tv/YummySmokyPeppermintVoteYea-NirB0VACtMjkgGVz
+# (beautiful bananza remix)
+https://clips.twitch.tv/TardyRamshackleMosquitoChefFrank-K7NFEbWarSdYd3xG
+# (i get a raise and i just have to suck you off, get to work)
+https://clips.twitch.tv/IcyBlightedKumquatStrawBeary-Bnm9pQnOV1fg5sUr
+# (enemy remix titty squeeze, get to work)
+https://clips.twitch.tv/ScaryVictoriousAppleWoofer-I3CbfQVfmAcEMZe8
+
+# ==========================================================================
+# === additions 2026-04-16 ===
+# ==========================================================================
+
+https://www.twitch.tv/whisqey/clip/TawdryRoughSkunkPipeHype-nRKNAPzfn80VpT9O
+# (ermm)
+https://www.twitch.tv/whisqey/clip/BoxySuperRaccoonDAESuppy-stE0nfg8x_eWGPyI
+# (Tell a joke!)
+https://www.twitch.tv/whisqey/clip/ExcitedPoorRaisinVoHiYo-1hZy1pXnVT1aX9JB
+# (average bay area man)
+https://www.twitch.tv/whisqey/clip/PluckyBlitheCobblerPRChase-ECgi65cll4lbYJB5
+# (vine boom of pain)
+https://www.twitch.tv/whisqey/clip/GoodShyPanBCouch-egJOwMKtDOaQxIYK
+# (stop it shist)
+https://www.twitch.tv/whisqey/clip/DifficultPlayfulBeeSwiftRage-yjypc0f87mCIFs62
+# (when shorty throws it back)
+https://www.twitch.tv/whisqey/clip/PrettiestAthleticLampDansGame-0p6osRtk4sRn3YTs
+# (baby crocodile jumpscare)
+https://www.twitch.tv/whisqey/clip/CulturedCovertDumplingsPoooound-o2x53up2DQGvfeab
+# (hey look at this)
+https://www.twitch.tv/whisqey/clip/PeppySmilingFishAMPEnergyCherry-2nDs8rcURH08afYp
+# (ceiling titty!!)
+https://www.twitch.tv/whisqey/clip/TsundereScaryMetalHoneyBadger-15gkoPOLYziOHb6q
+# (what's up slime)
+https://www.twitch.tv/whisqey/clip/HedonisticDifferentMochaUnSane-PnUQIv77ZI8Mt_WK
+# (The headache didn't laugh)
+https://www.twitch.tv/whisqey/clip/CarelessPeacefulBeanBCouch-8hNStX89uKm4B3W1
+# (terror behind the wheel)
+https://www.twitch.tv/whisqey/clip/CulturedCrispyGalagoBudStar-hQmdzoHMAUGOqtYh
+# (cant keep track)
+https://www.twitch.tv/whisqey/clip/MoistSullenMoonKappaPride-vuiq5AXL1D7gItJz
+# (dangerous maneuvers)
+https://www.twitch.tv/whisqey/clip/InterestingPricklySwanPanicBasket-eb71w7QIWY63srov
+# (TMI)
+https://www.twitch.tv/whisqey/clip/DignifiedHumbleYakTBTacoRight-yCoVAJlKFsuIpixs

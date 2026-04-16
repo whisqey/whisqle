@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Whisqle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <style>
     :root {
       --bg: #0e0e10;
@@ -15,19 +19,51 @@
       --purple: #9147ff;
       --purple-hover: #772ce8;
       --green: #00b16a;
-      --red: #eb4034;
+      --yellow: #d4a017;
+      --red: #b85450;
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface2: #ececf0;
+      --border: #d4d4d8;
+      --text: #18181b;
+      --muted: #52525b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg);
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(14,14,16,0.97) 0%,
+          rgba(14,14,16,0.7)  28%,
+          rgba(14,14,16,0.7)  72%,
+          rgba(14,14,16,0.97) 100%
+        ) center/cover no-repeat fixed,
+        url("assets/whisqle_bg.png") center/cover no-repeat fixed,
+        var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    [data-theme="light"] body {
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(245,245,247,0.97) 0%,
+          rgba(245,245,247,0.8)  28%,
+          rgba(245,245,247,0.8)  72%,
+          rgba(245,245,247,0.97) 100%
+        ) center/cover no-repeat fixed,
+        url("assets/whisqle_bg.png") center/cover no-repeat fixed,
+        var(--bg);
     }
 
     header {
@@ -41,92 +77,111 @@
       margin-bottom: 4px;
     }
 
-    header h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--purple);
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .badge {
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      padding: 3px 10px;
-      border-radius: 20px;
+    header h1 {
+      margin: 0;
+      line-height: 0;
+    }
+
+    header h1 img {
+      height: 44px;
+      width: auto;
+      display: block;
+      filter: invert(1);
+    }
+
+    [data-theme="light"] header h1 img { filter: none; }
+
+    .subtitle {
+      margin: 0;
+      font-size: 0.78rem;
       color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+    }
+
+    .countdown {
+      margin: 2px 0 0;
+      font-size: calc(0.78rem - 1px);
+      font-style: italic;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .header-actions { display: flex; gap: 8px; }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .icon-btn .icon-img {
+      width: 28px;
+      height: 28px;
+      display: block;
+      filter: invert(1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    [data-theme="light"] .icon-btn .icon-img { filter: none; }
+
+    .icon-btn .icon-default { opacity: 1; }
+    .icon-btn .icon-hover   { opacity: 0; }
+
+    .icon-btn:hover .icon-default { animation: icon-flip 0.5s steps(1) infinite; }
+    .icon-btn:hover .icon-hover   { animation: icon-flip-reverse 0.5s steps(1) infinite; }
+
+    @keyframes icon-flip {
+      0%, 49.99% { opacity: 1; }
+      50%, 100%  { opacity: 0; }
+    }
+    @keyframes icon-flip-reverse {
+      0%, 49.99% { opacity: 0; }
+      50%, 100%  { opacity: 1; }
     }
 
     main {
       width: 100%;
       max-width: 580px;
-      padding: 16px;
-      flex: 1;
+      padding: 20px;
+      margin: 8px 0 16px;
       display: flex;
       flex-direction: column;
       gap: 0;
+      background: rgba(24,24,27,0.55);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      backdrop-filter: blur(2px);
+      position: relative;
     }
 
-    /* ── Mode selection ─────────────────────────────────────────── */
-
-    #mode-screen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      padding-top: 32px;
+    [data-theme="light"] main {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(0,0,0,0.08);
     }
-
-    #mode-screen .intro {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      max-width: 380px;
-    }
-
-    #mode-screen h2 {
-      font-size: 1rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .mode-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .mode-card {
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 16px;
-      cursor: pointer;
-      text-align: center;
-      transition: border-color 0.15s, background 0.15s, transform 0.1s;
-      user-select: none;
-    }
-
-    .mode-card:hover {
-      border-color: var(--purple);
-      background: var(--surface2);
-      transform: translateY(-1px);
-    }
-
-    .mode-card:active { transform: translateY(0); }
-    .mode-card .icon { font-size: 2rem; margin-bottom: 10px; }
-    .mode-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-    .mode-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
 
     /* ── Game screen ────────────────────────────────────────────── */
 
     #game-screen {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 14px;
     }
@@ -208,49 +263,55 @@
       gap: 6px;
     }
 
-    .guess-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
-      min-height: 46px;
-      font-size: 0.875rem;
+    .guess-cells {
+      display: grid;
+      grid-template-columns: 1fr 1fr 48px;
+      gap: 6px;
     }
 
-    .guess-row.empty {
-      border-style: dashed;
-      border-color: var(--border);
+    .direction-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .direction-cell:not(:empty) {
+      background: var(--surface2);
+    }
+
+    .guess-cell {
+      position: relative;
+      border-radius: 8px;
+      padding: 12px 14px;
+      min-height: 46px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .guess-cell.empty {
+      border: 1px dashed var(--border);
       background: transparent;
       opacity: 0.4;
     }
 
-    .guess-row.active {
-      border-color: var(--purple);
-      border-style: dashed;
+    .guess-cell.active {
+      border: 1px dashed var(--purple);
       background: transparent;
       opacity: 0.6;
     }
 
-    .guess-row .emojis {
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      min-width: 44px;
-    }
+    .cell-green  { background: var(--green);  color: #fff; transition: filter 150ms ease; }
+    .cell-yellow { background: var(--yellow); color: #fff; transition: filter 150ms ease; }
+    .cell-red    { background: var(--red);    color: #fff; transition: filter 150ms ease; }
 
-    .guess-row .guess-label {
-      flex: 1;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .guess-row .direction {
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-align: right;
-    }
+    .cell-green:hover, .cell-yellow:hover, .cell-red:hover { filter: brightness(1.12); }
 
     /* Input area */
     #input-area {
@@ -331,90 +392,211 @@
     .btn-ghost:hover { background: var(--purple); color: #fff; }
 
     #guess-counter {
-      margin-top: 8px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--muted);
-      text-align: right;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
 
     #error-msg {
-      margin-top: 7px;
       font-size: 0.8rem;
       color: var(--red);
-      min-height: 18px;
     }
 
-    /* Result */
-    #result-area {
+    #error-msg:not(:empty) { margin-top: 7px; }
+
+    /* Overlays (result, settings, how-to share a pattern) */
+    .modal-backdrop,
+    #result-backdrop {
       display: none;
-      flex-direction: column;
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
       align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 240ms ease-out;
+      border-radius: 14px;
+    }
+
+    .modal-backdrop.show,
+    #result-backdrop.show { display: flex; opacity: 1; }
+
+    #result-area,
+    .modal-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
       gap: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 22px 16px;
-      text-align: center;
+      padding: 26px 22px 22px;
+      max-width: 420px;
+      width: 100%;
+      transform: scale(0.96);
+      opacity: 0;
+      transition: transform 300ms ease-out, opacity 300ms ease-out;
     }
 
-    #result-area.show { display: flex; }
+    #result-area { align-items: center; text-align: center; max-width: 360px; }
+
+    #result-backdrop.show #result-area,
+    .modal-backdrop.show .modal-card { transform: scale(1); opacity: 1; }
+
+    .modal-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .modal-close:hover { color: var(--text); background: var(--surface2); }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
 
     #result-title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 800;
     }
 
     #result-title.win { color: var(--green); }
     #result-title.lose { color: var(--red); }
 
+    #flavor-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
     #result-answer {
       font-size: 0.85rem;
       color: var(--muted);
     }
 
-    #emoji-grid {
-      font-size: 1.4rem;
-      letter-spacing: 3px;
-      line-height: 2;
-    }
+    #emoji-grid { display: none; }
 
-    #copy-btn { margin-top: 4px; }
+    #copy-btn { margin-top: 6px; }
 
     #copy-confirm {
       font-size: 0.8rem;
       color: var(--green);
       height: 18px;
     }
+
+    /* Settings + howto shared bits */
+    .setting-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+
+    .setting-row + .setting-row { border-top: 1px solid var(--border); }
+
+    .setting-label { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+    .setting-sub { color: var(--muted); font-size: 0.8rem; margin-top: 4px; line-height: 1.45; }
+
+    .switch {
+      flex-shrink: 0;
+      width: 42px;
+      height: 24px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      margin-top: 2px;
+    }
+
+    .switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .switch.on { background: var(--purple); border-color: var(--purple); }
+    .switch.on::after { transform: translateX(18px); background: #fff; }
+
+    .howto-section { margin-bottom: 14px; }
+    .howto-section:last-child { margin-bottom: 0; }
+    .howto-section p { color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
+    .howto-section p + p { margin-top: 6px; }
+    .howto-section strong { color: var(--text); }
+
+    .howto-example {
+      display: grid;
+      grid-template-columns: 1fr 1fr 48px;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .howto-example .guess-cell { min-height: 40px; font-size: 0.88rem; }
+
+    .howto-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .howto-legend .sw {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Whisqle</h1>
-  <span class="badge" id="mode-badge" style="display:none"></span>
+  <div class="header-title">
+    <h1><img src="assets/whisqle_title.png" alt="Whisqle"></h1>
+    <p class="subtitle">how well do you know your clips?</p>
+    <p class="countdown" id="next-clip-countdown" hidden></p>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="help-btn" onclick="openHowto()" aria-label="How to play">
+      <img src="assets/info1.png" class="icon-img icon-default" alt="">
+      <img src="assets/info2.png" class="icon-img icon-hover" alt="">
+    </button>
+    <button class="icon-btn" id="settings-btn" onclick="openSettings()" aria-label="Settings">
+      <img src="assets/settings1.png" class="icon-img icon-default" alt="">
+      <img src="assets/settings2.png" class="icon-img icon-hover" alt="">
+    </button>
+  </div>
 </header>
 
 <main>
 
-  <!-- Mode selection -->
-  <div id="mode-screen">
-    <p class="intro">A Twitch clip plays. Guess the month and year it's from. 6 guesses.</p>
-    <h2>Choose a mode</h2>
-    <div class="mode-cards">
-      <div class="mode-card" onclick="startGame('normal')">
-        <div class="icon">🎮</div>
-        <h3>Normal</h3>
-        <p>Clip unlocks on guess 2. Year range and season hints on later guesses.</p>
-      </div>
-      <div class="mode-card" onclick="startGame('nohints')">
-        <div class="icon">🔒</div>
-        <h3>No Hints</h3>
-        <p>Thumbnail then clip — no year or season hints. Pure instinct.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Game -->
   <div id="game-screen">
 
     <div class="hint-area">
@@ -425,9 +607,8 @@
       <div id="hint-pills"></div>
     </div>
 
-    <div class="board" id="board"></div>
-
     <div id="input-area">
+      <div id="guess-counter">Guess 1 of 6</div>
       <div class="input-row">
         <select id="month-select">
           <option value="">Month…</option>
@@ -444,21 +625,81 @@
           <option value="11">November</option>
           <option value="12">December</option>
         </select>
-        <input type="number" id="year-input" placeholder="Year" min="2011" max="2026">
+        <select id="year-input">
+          <option value="">Year…</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
         <button class="btn" id="submit-btn" onclick="submitGuess()">Guess</button>
       </div>
       <div id="error-msg"></div>
-      <div id="guess-counter">Guess 1 of 6</div>
     </div>
 
+    <div class="board" id="board"></div>
+
+  </div>
+
+  <div id="result-backdrop">
     <div id="result-area">
+      <button class="modal-close" id="result-close" onclick="closeResult()" aria-label="Close">✕</button>
       <div id="result-title"></div>
+      <div id="flavor-text"></div>
       <div id="result-answer"></div>
       <div id="emoji-grid"></div>
       <button class="btn btn-ghost" id="copy-btn" onclick="copyResult()">📋 Copy Result</button>
       <div id="copy-confirm"></div>
     </div>
+  </div>
 
+  <div class="modal-backdrop" id="settings-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeSettings()" aria-label="Close">✕</button>
+      <div class="modal-title">Settings</div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Hard mode</div>
+          <div class="setting-sub">No year range or quarter hints.</div>
+        </div>
+        <div class="switch" id="hard-switch" onclick="toggleHard()" role="switch" aria-checked="false"></div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Dark mode</div>
+          <div class="setting-sub">Toggle between dark and light themes.</div>
+        </div>
+        <div class="switch on" id="theme-switch" onclick="toggleTheme()" role="switch" aria-checked="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="howto-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeHowto()" aria-label="Close">✕</button>
+      <div class="modal-title">How to play</div>
+      <div class="howto-section">
+        <p>Guess the <strong>month and year</strong> of today's Twitch clip in 6 tries. Each guess gets color feedback plus a direction arrow.</p>
+      </div>
+      <div class="howto-section">
+        <div class="howto-example">
+          <div class="guess-cell cell-yellow">October</div>
+          <div class="guess-cell cell-red">2022</div>
+          <div class="direction-cell">➡️</div>
+        </div>
+        <div class="howto-legend">
+          <div><span class="sw" style="background: var(--green)"></span>Exact match</div>
+          <div><span class="sw" style="background: var(--yellow)"></span>Same quarter (month) or within 12 months (year)</div>
+          <div><span class="sw" style="background: var(--red)"></span>Different quarter or more than 12 months off</div>
+          <div>➡️ answer is later &nbsp;·&nbsp; ⬅️ answer is earlier</div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </main>
@@ -473,35 +714,34 @@
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  const SEASON_MONTHS = {
-    winter: [12, 1, 2],
-    spring: [3, 4, 5],
-    summer: [6, 7, 8],
-    fall:   [9, 10, 11]
-  };
-
-  const SEASON_LABEL = {
-    winter: '❄️ Winter',
-    spring: '🌸 Spring',
-    summer: '☀️ Summer',
-    fall:   '🍂 Fall'
-  };
+  const EMOJI_TO_CLASS = { '🟩': 'cell-green', '🟨': 'cell-yellow', '🟥': 'cell-red' };
 
   // ── State ──────────────────────────────────────────────────────────────────
 
-  let clips      = [];
-  let todaysClip = null;
-  let gameMode   = null;   // 'normal' | 'nohints'
-  let guesses    = [];     // [{ month, year }, ...]
-  let gameOver   = false;
-  let won        = false;
+  let clips              = [];
+  let todaysClip         = null;
+  let gameMode           = 'normal';   // 'normal' | 'hard'
+  let guesses            = [];
+  let gameOver           = false;
+  let won                = false;
+  let currentMediaState  = 'none';     // 'none' | 'thumbnail' | 'clip'
+  let countdownInterval  = null;
+
+  const STORAGE_KEY = 'whisqle:daily';
+
+  const FLAVOR = {
+    1: 'true whisqey loremaster!!',
+    2: 'real whisqeyhead!',
+    3: 'certified clip watcher',
+    4: 'you know your stuff',
+    5: "your memory hasn't failed you",
+    6: 'phew, close call!'
+  };
 
   // ── Helpers ────────────────────────────────────────────────────────────────
 
-  function getSeason(month) {
-    for (const [name, months] of Object.entries(SEASON_MONTHS)) {
-      if (months.includes(month)) return name;
-    }
+  function getQuarter(month) {
+    return Math.ceil(month / 3);
   }
 
   function totalMonths(year, month) {
@@ -516,16 +756,45 @@
 
   function getMonthEmoji(gM, cM) {
     if (gM === cM) return '🟩';
-    return getSeason(gM) === getSeason(cM) ? '🟨' : '🟥';
+    return getQuarter(gM) === getQuarter(cM) ? '🟨' : '🟥';
   }
 
-  function getDirection(gY, gM, cY, cM) {
-    return totalMonths(gY, gM) < totalMonths(cY, cM) ? '⬆ Too early' : '⬇ Too late';
+  function directionArrow(g) {
+    const guessTotal  = totalMonths(g.year, g.month);
+    const targetTotal = totalMonths(todaysClip.year, todaysClip.month);
+    if (targetTotal > guessTotal) return '➡️';
+    if (targetTotal < guessTotal) return '⬅️';
+    return '✅';
+  }
+
+  // DST-aware Eastern Time (America/New_York). Day rolls at ET midnight.
+  function getETDateParts(date = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+    }).formatToParts(date);
+    const get = t => parseInt(parts.find(p => p.type === t).value, 10);
+    let hour = get('hour'); if (hour === 24) hour = 0;
+    return { year: get('year'), month: get('month'), day: get('day'), hour, minute: get('minute'), second: get('second') };
+  }
+
+  function getETDateString() {
+    const { year, month, day } = getETDateParts();
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  }
+
+  function msUntilNextETMidnight() {
+    const now = new Date();
+    const { hour, minute, second } = getETDateParts(now);
+    const secondsIntoDay = hour * 3600 + minute * 60 + second;
+    const secondsRemaining = 86400 - secondsIntoDay;
+    return secondsRemaining * 1000 - now.getMilliseconds();
   }
 
   function getDailyClip(arr) {
-    const now   = new Date();
-    const utc   = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    const { year, month, day } = getETDateParts();
+    const utc   = Date.UTC(year, month - 1, day);
     const epoch = Date.UTC(2024, 0, 1);
     const days  = Math.floor((utc - epoch) / 86400000);
     return arr[((days % arr.length) + arr.length) % arr.length];
@@ -537,20 +806,113 @@
     return m ? m[1] : null;
   }
 
-  // ── Start game ─────────────────────────────────────────────────────────────
+  function saveDailyResult() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        date: getETDateString(),
+        mode: gameMode,
+        guesses,
+        won
+      }));
+    } catch (e) { /* private mode / quota — silently skip */ }
+  }
 
-  function startGame(mode) {
-    gameMode = mode;
-    document.getElementById('mode-screen').style.display = 'none';
-    document.getElementById('game-screen').style.display = 'flex';
-    document.getElementById('game-screen').style.flexDirection = 'column';
-    document.getElementById('game-screen').style.gap = '14px';
+  function loadDailyResult() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (!data || data.date !== getETDateString()) return null;
+      return data;
+    } catch (e) { return null; }
+  }
 
-    const badge = document.getElementById('mode-badge');
-    badge.style.display = '';
-    badge.textContent = mode === 'normal' ? '🎮 Normal' : '🔒 No Hints';
+  function tickCountdown() {
+    const el = document.getElementById('next-clip-countdown');
+    if (!el) return;
+    const ms = msUntilNextETMidnight();
+    if (ms <= 0) {
+      stopCountdown();
+      location.reload();
+      return;
+    }
+    const totalSecs = Math.floor(ms / 1000);
+    const h = String(Math.floor(totalSecs / 3600)).padStart(2, '0');
+    const m = String(Math.floor((totalSecs % 3600) / 60)).padStart(2, '0');
+    const s = String(totalSecs % 60).padStart(2, '0');
+    el.textContent = `new clip in ${h}:${m}:${s}`;
+  }
 
+  function startCountdown() {
+    if (countdownInterval) return;
+    tickCountdown();
+    countdownInterval = setInterval(tickCountdown, 1000);
+  }
+
+  function stopCountdown() {
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+  }
+
+  function updateCountdownDisplay() {
+    const el = document.getElementById('next-clip-countdown');
+    if (!el) return;
+    if (gameOver) {
+      el.hidden = false;
+      startCountdown();
+    } else {
+      el.hidden = true;
+      stopCountdown();
+    }
+  }
+
+  // ── Modals / settings ──────────────────────────────────────────────────────
+
+  function openSettings() {
+    document.getElementById('settings-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSettings() {
+    document.getElementById('settings-modal').classList.remove('show');
+    if (!gameOver) document.body.style.overflow = '';
+  }
+
+  function openHowto() {
+    document.getElementById('howto-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHowto() {
+    document.getElementById('howto-modal').classList.remove('show');
+    if (!gameOver) document.body.style.overflow = '';
+  }
+
+  function toggleHard() {
+    if (loadDailyResult()) return;
+    gameMode = gameMode === 'normal' ? 'hard' : 'normal';
+    const sw = document.getElementById('hard-switch');
+    sw.classList.toggle('on', gameMode === 'hard');
+    sw.setAttribute('aria-checked', gameMode === 'hard' ? 'true' : 'false');
+    guesses            = [];
+    gameOver           = false;
+    won                = false;
+    currentMediaState  = 'none';
+    document.getElementById('result-backdrop').classList.remove('show');
     render();
+  }
+
+  function toggleTheme() {
+    const root = document.documentElement;
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    if (next === 'dark') delete root.dataset.theme; else root.dataset.theme = 'light';
+    const sw = document.getElementById('theme-switch');
+    sw.classList.toggle('on', next === 'dark');
+    sw.setAttribute('aria-checked', next === 'dark' ? 'true' : 'false');
+  }
+
+  function closeResult() {
+    document.getElementById('result-backdrop').classList.remove('show');
+    document.body.style.overflow = '';
   }
 
   // ── Render ─────────────────────────────────────────────────────────────────
@@ -559,66 +921,59 @@
     renderHints();
     renderBoard();
     renderInput();
+    updateCountdownDisplay();
   }
 
   function renderHints() {
     const submitted = guesses.length;
-    const showClip       = submitted >= 1;
-    const showYearHint   = gameMode === 'normal' && submitted >= 3;
-    const showSeasonHint = gameMode === 'normal' && submitted >= 4;
+    const showClip        = submitted >= 1;
+    const showYearHint    = gameMode === 'normal' && submitted >= 3;
+    const showQuarterHint = gameMode === 'normal' && submitted >= 4;
 
     const media  = document.getElementById('hint-media');
     const notice = document.getElementById('hint-embed-notice');
     const pills  = document.getElementById('hint-pills');
 
-    // Thumbnail / embed
-    if (showClip) {
-      const clipId = extractClipId(todaysClip.clipUrl);
-      const host   = window.location.hostname;
+    const clipId = extractClipId(todaysClip.clipUrl);
+    const host   = window.location.hostname;
 
-      if (!clipId) {
-        // Fallback: show thumbnail if clip URL isn't a recognisable Twitch clip
-        media.innerHTML = todaysClip.thumbnailUrl
-          ? `<img src="${todaysClip.thumbnailUrl}" alt="Clip thumbnail">`
-          : `<span class="placeholder-icon">🎬</span>`;
-      } else if (!host) {
-        // file:// — embeds won't work
-        media.innerHTML = todaysClip.thumbnailUrl
-          ? `<img src="${todaysClip.thumbnailUrl}" alt="Clip thumbnail">`
-          : `<span class="placeholder-icon">🎬</span>`;
-        notice.style.display = 'block';
-      } else {
+    let desiredState = 'thumbnail';
+    let showNotice   = false;
+    if (showClip) {
+      if (!clipId)      desiredState = 'thumbnail';
+      else if (!host) { desiredState = 'thumbnail'; showNotice = true; }
+      else              desiredState = 'clip';
+    }
+
+    if (desiredState !== currentMediaState) {
+      if (desiredState === 'clip') {
         const src = `https://clips.twitch.tv/embed?clip=${clipId}&parent=${host}&autoplay=false`;
         media.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
-        if (todaysClip.thumbnailUrl) {
-          // Thumbnail behind iframe — handled by iframe overlay
-        }
-        notice.style.display = 'none';
-      }
-    } else {
-      // Guess 1: thumbnail only
-      notice.style.display = 'none';
-      if (todaysClip.thumbnailUrl) {
+      } else if (todaysClip.thumbnailUrl) {
         media.innerHTML = `<img src="${todaysClip.thumbnailUrl}" alt="Clip thumbnail">`;
       } else {
         media.innerHTML = `<span class="placeholder-icon">🎬</span>`;
       }
+      currentMediaState = desiredState;
     }
+    notice.style.display = showNotice ? 'block' : 'none';
 
-    // Text hint pills
     pills.innerHTML = '';
 
     if (showYearHint) {
+      const low  = Math.max(2011, todaysClip.year - 1);
+      const high = Math.min(new Date().getUTCFullYear(), todaysClip.year + 1);
+      const label = low === high ? `${low}` : `${low}–${high}`;
       const pill = document.createElement('div');
       pill.className = 'hint-pill';
-      pill.innerHTML = `<strong>📅 Year:</strong> ${todaysClip.year - 1}–${todaysClip.year + 1}`;
+      pill.innerHTML = `<strong>📅 Year:</strong> ${label}`;
       pills.appendChild(pill);
     }
 
-    if (showSeasonHint) {
+    if (showQuarterHint) {
       const pill = document.createElement('div');
       pill.className = 'hint-pill';
-      pill.innerHTML = `<strong>🌿 Season:</strong> ${SEASON_LABEL[getSeason(todaysClip.month)]}`;
+      pill.innerHTML = `<strong>📅 Quarter:</strong> Q${getQuarter(todaysClip.month)}`;
       pills.appendChild(pill);
     }
   }
@@ -627,28 +982,27 @@
     const board = document.getElementById('board');
     board.innerHTML = '';
 
-    for (let i = 0; i < MAX_GUESSES; i++) {
+    const rowsToShow = gameOver ? guesses.length : guesses.length + 1;
+
+    for (let i = 0; i < rowsToShow; i++) {
       const row = document.createElement('div');
+      row.className = 'guess-cells';
 
       if (i < guesses.length) {
-        // Filled guess
-        const g      = guesses[i];
-        const yEmoji = getYearEmoji(g.year, g.month, todaysClip.year, todaysClip.month);
-        const mEmoji = getMonthEmoji(g.month, todaysClip.month);
-        const exact  = g.year === todaysClip.year && g.month === todaysClip.month;
-        const dir    = exact ? '✓ Correct!' : getDirection(g.year, g.month, todaysClip.year, todaysClip.month);
+        const g = guesses[i];
+        const monthClass = EMOJI_TO_CLASS[getMonthEmoji(g.month, todaysClip.month)];
+        const yearClass  = EMOJI_TO_CLASS[getYearEmoji(g.year, g.month, todaysClip.year, todaysClip.month)];
+        const dir        = directionArrow(g);
 
-        row.className = 'guess-row';
         row.innerHTML = `
-          <span class="emojis">${yEmoji}${mEmoji}</span>
-          <span class="guess-label">${MONTHS[g.month]} ${g.year}</span>
-          <span class="direction">${dir}</span>`;
-      } else if (i === guesses.length && !gameOver) {
-        // Current guess slot
-        row.className = 'guess-row active';
+          <div class="guess-cell ${monthClass}">${MONTHS[g.month]}</div>
+          <div class="guess-cell ${yearClass}">${g.year}</div>
+          <div class="direction-cell">${dir}</div>`;
       } else {
-        // Future empty slot
-        row.className = 'guess-row empty';
+        row.innerHTML = `
+          <div class="guess-cell active"></div>
+          <div class="guess-cell active"></div>
+          <div class="direction-cell"></div>`;
       }
 
       board.appendChild(row);
@@ -657,41 +1011,59 @@
 
   function renderInput() {
     const inputArea = document.getElementById('input-area');
-    const resultArea = document.getElementById('result-area');
+    const backdrop  = document.getElementById('result-backdrop');
 
     if (gameOver) {
       inputArea.style.display = 'none';
-      showResult(resultArea);
+      showResult(backdrop);
     } else {
       inputArea.style.display = 'block';
+      backdrop.classList.remove('show');
+      document.body.style.overflow = '';
       const n = guesses.length + 1;
       document.getElementById('guess-counter').textContent = `Guess ${n} of ${MAX_GUESSES}`;
     }
   }
 
-  function showResult(area) {
-    area.classList.add('show');
+  function showResult(backdrop) {
+    backdrop.classList.add('show');
+    document.body.style.overflow = 'hidden';
 
     const title  = document.getElementById('result-title');
+    const flavor = document.getElementById('flavor-text');
     const answer = document.getElementById('result-answer');
     const grid   = document.getElementById('emoji-grid');
 
     if (won) {
       const n = guesses.length;
-      title.textContent  = n === 1 ? '🏆 First try!' : `🎉 Got it in ${n}!`;
-      title.className    = 'result-title win';
+      title.textContent  = '🎉';
+      title.className    = 'win';
+      flavor.textContent = FLAVOR[n] || '';
     } else {
       title.textContent  = '😔 Better luck tomorrow';
-      title.className    = 'result-title lose';
+      title.className    = 'lose';
+      flavor.textContent = 'just not your day';
     }
 
     answer.textContent = `Answer: ${MONTHS[todaysClip.month]} ${todaysClip.year}`;
 
+    // Built for share-text copy; hidden on screen via CSS.
     grid.innerHTML = guesses.map(g => {
       const y = getYearEmoji(g.year, g.month, todaysClip.year, todaysClip.month);
       const m = getMonthEmoji(g.month, todaysClip.month);
       return `${y}${m}`;
     }).join('<br>');
+  }
+
+  function fireConfetti() {
+    if (typeof confetti !== 'function') return;
+    confetti({
+      particleCount: 140,
+      spread: 80,
+      startVelocity: 38,
+      origin: { y: 0.65 },
+      disableForReducedMotion: true
+    });
   }
 
   // ── Submit guess ───────────────────────────────────────────────────────────
@@ -706,16 +1078,14 @@
     const month = parseInt(monthEl.value);
     const year  = parseInt(yearEl.value);
 
-    // Validation
     let err = '';
-    if (!month)                          err = 'Please select a month.';
-    else if (!year || isNaN(year))       err = 'Please enter a year.';
-    else if (year < 2011 || year > 2026) err = 'Year must be between 2011 and 2026.';
+    if (!month)                    err = 'Please select a month.';
+    else if (!year || isNaN(year)) err = 'Please select a year.';
 
     if (err) {
       errorEl.textContent = err;
       if (!month) monthEl.classList.add('error'); else monthEl.classList.remove('error');
-      if (!year || isNaN(year) || year < 2011 || year > 2025)
+      if (!year || isNaN(year))
         yearEl.classList.add('error'); else yearEl.classList.remove('error');
       return;
     }
@@ -729,33 +1099,44 @@
     if (year === todaysClip.year && month === todaysClip.month) {
       won = true;
       gameOver = true;
+      fireConfetti();
     } else if (guesses.length >= MAX_GUESSES) {
       gameOver = true;
     }
 
-    // Reset inputs
+    if (gameOver) saveDailyResult();
+
     monthEl.value = '';
     yearEl.value  = '';
 
     render();
   }
 
-  // Allow Enter key to submit
+  function anyOverlayOpen() {
+    return !!document.querySelector('.modal-backdrop.show, #result-backdrop.show');
+  }
+
   document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !gameOver && gameMode) submitGuess();
+    if (e.key === 'Enter' && !gameOver && !anyOverlayOpen()) submitGuess();
+    if (e.key === 'Escape') {
+      if (document.getElementById('settings-modal').classList.contains('show')) closeSettings();
+      else if (document.getElementById('howto-modal').classList.contains('show')) closeHowto();
+      else if (document.getElementById('result-backdrop').classList.contains('show')) closeResult();
+    }
   });
 
   // ── Share ──────────────────────────────────────────────────────────────────
 
   function buildShareText() {
-    const modeName = gameMode === 'normal' ? 'Normal' : 'No Hints';
+    const modeName = gameMode === 'normal' ? 'Normal' : 'Hard';
     const result   = won ? `${guesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`;
+    const dateStr  = getETDateString();
     const rows     = guesses.map(g => {
       const y = getYearEmoji(g.year, g.month, todaysClip.year, todaysClip.month);
       const m = getMonthEmoji(g.month, todaysClip.month);
       return `${y}${m}`;
     });
-    return `Whisqle ${result} [${modeName}]\n${rows.join('\n')}`;
+    return `Whisqle ${result} [${modeName}]\n${dateStr}\n${rows.join('\n')}`;
   }
 
   function copyResult() {
@@ -764,11 +1145,10 @@
     const confirm = document.getElementById('copy-confirm');
 
     navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = '✅ Copied!';
-      confirm.textContent = text.split('\n').slice(1).join('  ');
+      btn.textContent     = '✅ Copied!';
+      confirm.textContent = '';
       setTimeout(() => {
-        btn.textContent     = '📋 Copy Result';
-        confirm.textContent = '';
+        btn.textContent = '📋 Copy Result';
       }, 2500);
     }).catch(() => {
       confirm.textContent = 'Copy failed — try a different browser.';
@@ -783,6 +1163,21 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       clips      = await res.json();
       todaysClip = getDailyClip(clips);
+
+      const saved = loadDailyResult();
+      if (saved) {
+        gameMode = saved.mode;
+        guesses  = Array.isArray(saved.guesses) ? saved.guesses : [];
+        won      = !!saved.won;
+        gameOver = true;
+        const sw = document.getElementById('hard-switch');
+        if (sw) {
+          sw.classList.toggle('on', gameMode === 'hard');
+          sw.setAttribute('aria-checked', gameMode === 'hard' ? 'true' : 'false');
+        }
+      }
+
+      render();
     } catch (e) {
       document.querySelector('main').innerHTML = `
         <div style="padding:48px 16px;text-align:center;color:var(--muted)">
