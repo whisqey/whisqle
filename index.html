@@ -811,6 +811,7 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         date: getETDateString(),
+        clipId: todaysClip ? extractClipId(todaysClip.clipUrl) : null,
         mode: gameMode,
         guesses,
         won
@@ -824,6 +825,8 @@
       if (!raw) return null;
       const data = JSON.parse(raw);
       if (!data || data.date !== getETDateString()) return null;
+      const currentClipId = todaysClip ? extractClipId(todaysClip.clipUrl) : null;
+      if (data.clipId !== currentClipId) return null;
       return data;
     } catch (e) { return null; }
   }
