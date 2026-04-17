@@ -962,7 +962,7 @@
     pills.innerHTML = '';
 
     if (showYearHint) {
-      const low  = Math.max(2011, todaysClip.year - 1);
+      const low  = Math.max(2018, todaysClip.year - 1);
       const high = Math.min(new Date().getUTCFullYear(), todaysClip.year + 1);
       const label = low === high ? `${low}` : `${low}–${high}`;
       const pill = document.createElement('div');
