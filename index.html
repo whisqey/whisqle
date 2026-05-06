@@ -491,6 +491,14 @@
       color: var(--muted);
     }
 
+    #result-credit {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    #result-credit:empty { display: none; }
+
     #emoji-grid { display: none; }
 
     #copy-btn { margin-top: 6px; }
@@ -653,6 +661,7 @@
       <div id="result-title"></div>
       <div id="flavor-text"></div>
       <div id="result-answer"></div>
+      <div id="result-credit"></div>
       <div id="emoji-grid"></div>
       <button class="btn btn-ghost" id="copy-btn" onclick="copyResult()">📋 Copy Result</button>
       <div id="copy-confirm"></div>
@@ -1058,6 +1067,7 @@
     const title  = document.getElementById('result-title');
     const flavor = document.getElementById('flavor-text');
     const answer = document.getElementById('result-answer');
+    const credit = document.getElementById('result-credit');
     const grid   = document.getElementById('emoji-grid');
 
     if (won) {
@@ -1072,6 +1082,7 @@
     }
 
     answer.textContent = `Answer: ${MONTHS[todaysClip.month]} ${todaysClip.year}`;
+    credit.textContent = todaysClip.creatorName ? `clipped by ${todaysClip.creatorName.toLowerCase()}` : '';
 
     // Built for share-text copy; hidden on screen via CSS.
     grid.innerHTML = guesses.map(g => {

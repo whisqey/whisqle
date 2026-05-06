@@ -88,7 +88,7 @@ async function main() {
     }
   }
 
-  const toFetch = valid.filter(e => !cachedById[e.id]);
+  const toFetch = valid.filter(e => !cachedById[e.id] || !cachedById[e.id].creatorName);
   const cachedCount = valid.length - toFetch.length;
 
   console.log(`${valid.length} clip(s) total — ${cachedCount} cached, ${toFetch.length} new.`);
@@ -120,21 +120,24 @@ async function main() {
   // Build clips.json entries, preserving clips.txt order
   const clipsJson = valid
     .map(e => {
-      if (cachedById[e.id]) return cachedById[e.id];
       const clip = metaById[e.id];
-      if (!clip) return null;
-      const created = new Date(clip.created_at);
-      const year    = created.getUTCFullYear();
-      const month   = created.getUTCMonth() + 1; // 1-indexed
-      const date    = `${year}-${String(month).padStart(2, '0')}`;
+      if (clip) {
+        const created = new Date(clip.created_at);
+        const year    = created.getUTCFullYear();
+        const month   = created.getUTCMonth() + 1; // 1-indexed
+        const date    = `${year}-${String(month).padStart(2, '0')}`;
 
-      return {
-        date,
-        clipUrl:      e.url,
-        thumbnailUrl: clip.thumbnail_url,
-        year,
-        month
-      };
+        return {
+          date,
+          clipUrl:      e.url,
+          thumbnailUrl: clip.thumbnail_url,
+          creatorName:  clip.creator_name,
+          year,
+          month
+        };
+      }
+      if (cachedById[e.id]) return cachedById[e.id];
+      return null;
     })
     .filter(Boolean);
 
